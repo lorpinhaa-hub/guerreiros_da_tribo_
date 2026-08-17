@@ -22,7 +22,7 @@ jobs:
           cache: 'npm'
 
       - name: 📦 Instalar dependências
-        run: npm ci
+        run: npm install
 
       - name: 🏗️ Montar o app
         run: npm run build
@@ -42,7 +42,7 @@ jobs:
           chmod +x ./gradlew
           ./gradlew assembleRelease --no-daemon
 
-      - name: ✅ Baixar APK
+      - name: ✅ Disponibilizar APK
         uses: actions/upload-artifact@v4
         with:
           name: GuerreirosDaTribo-APK
