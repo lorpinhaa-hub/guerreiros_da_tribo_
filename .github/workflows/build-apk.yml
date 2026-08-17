@@ -1,0 +1,49 @@
+name: Gerar APK
+run-name: Gerando APK do App 📱
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Construir APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Baixar código
+        uses: actions/checkout@v4
+
+      - name: 🟢 Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Instalar dependências
+        run: npm ci
+
+      - name: 🏗️ Montar o app
+        run: npm run build
+
+      - name: 🤖 Preparar Android
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: 📱 Gerar APK
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap add android || true
+          npx cap sync android
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleRelease --no-daemon
+
+      - name: ✅ Baixar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GuerreirosDaTribo-APK
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
