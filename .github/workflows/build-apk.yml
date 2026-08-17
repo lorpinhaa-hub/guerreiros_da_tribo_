@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Baixar código
+      - name: 📥 Baixar codigo
         uses: actions/checkout@v4
 
       - name: 🟢 Instalar Node.js
@@ -21,7 +21,7 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: 📦 Instalar dependências
+      - name: 📦 Instalar dependencias
         run: npm install
 
       - name: 🏗️ Montar o app
