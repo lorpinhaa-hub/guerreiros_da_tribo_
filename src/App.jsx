@@ -15,17 +15,16 @@ import base44 from "./api/base44Client";
 
 const LOGO_URL = "https://media.base44.com/images/public/6a7ce15ca66c6e3ed58f020a/5f0bb2871_LOGOOFICIAL.jpg";
 
-// Componente de Navegação
 function BottomNav() {
   const { pathname } = useLocation();
 
   const links = [
-    { to="/inicio", label: "Início", icon: Home },
-    { to="/noticias", label: "Notícias", icon: Newspaper },
-    { to="/calendario", label: "Calendário", icon: Calendar },
-    { to="/galeria", label: "Galeria", icon: ImageIcon },
-    { to="/pagamentos", label: "Associe-se", icon: CreditCard },
-    { to="/socios", label: "Sócios", icon: Users },
+    { to: "/inicio", label: "Inicio", icon: Home },
+    { to: "/noticias", label: "Noticias", icon: Newspaper },
+    { to: "/calendario", label: "Calendario", icon: Calendar },
+    { to: "/galeria", label: "Galeria", icon: ImageIcon },
+    { to: "/pagamentos", label: "Associe-se", icon: CreditCard },
+    { to: "/socios", label: "Socios", icon: Users },
   ];
 
   return (
@@ -51,7 +50,6 @@ function BottomNav() {
   );
 }
 
-// Cabeçalho
 function Header({ user, onLogout }) {
   return (
     <header className="bg-[#005A20] border-b border-[#2E8B57]/40 px-4 py-3 flex items-center justify-between sticky top-0 z-40">
@@ -91,7 +89,6 @@ function Header({ user, onLogout }) {
   );
 }
 
-// Layout com navegação
 function Layout({ children, user, onLogout }) {
   const { pathname } = useLocation();
   const semNav = ["/login", "/register"].includes(pathname);
@@ -107,7 +104,6 @@ function Layout({ children, user, onLogout }) {
   );
 }
 
-// Rota protegida
 function ProtectedRoute({ children, user }) {
   if (!user) return <Navigate to="/login" replace />;
   return children;
